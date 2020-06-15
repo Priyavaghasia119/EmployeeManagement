@@ -1,0 +1,36 @@
+﻿<div ng-controller="LoginController">
+    <form name="empForm">
+        <fieldset>
+            <div>
+                <br /><br />
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="Email">Email<span style="color:#ff0000;">*</span></label>
+                        <div class="col-md-4">
+                            <input class="form-control" type="email" name="mail" id="email" ng-model="email" ng-required="true" />
+                            <span style="color:#ff0000;" ng-show="empForm.mail.$error.email">Email not valid !</span>
+                            <span style="color:#ff0000" ng-show="empForm.mail.$touched && empForm.mail.$error.required">Email is required.</span>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="Password">Password<span style="color:#ff0000;">*</span></label>
+                        <div class="col-md-4">
+                            <input class="form-control" type="password" name="pwd" id="Password" ng-pattern="/^(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/" ng-minlength="8" ng-maxlength="16" ng-model="password" ng-required="true">
+                            <span style="color:#ff0000" ng-show="empForm.pwd.$touched && empForm.pwd.$error.required">Password is required.</span>
+                            <span style="color:#ff0000" ng-show="empForm.pwd.$error.pattern">Password should contain one number,one character <br /> and one special character</span><br />
+                            <span style="color:#ff0000" ng-show="empForm.pwd.$error.minlength">Minimum 8 chars.</span>
+                            <span style="color:#ff0000" ng-show="empForm.pwd.$error.maxlength"> Maximum 16 chars.</span>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <div class="col-md-10">
+                            <input style="margin-top:20px;" type="button" ng-disabled="empForm.$invalid" value="Login" ng-click="login()" class="btn btn-primary" />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>

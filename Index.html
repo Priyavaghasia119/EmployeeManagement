@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-animate.min.js"></script>
+    <script src="Scripts/angular-touch.min.js"></script>
+    <script src="Scripts/angular-route.js"></script>
+    <link rel="stylesheet" href="Content/bootstrap.css" />
+    <link rel="stylesheet" href="http://ui-grid.info/release/ui-grid.css" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="Scripts/jquery-3.0.0.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="Scripts/dirPagination.js"></script>
+    <script src="Scripts/ng-file-upload-all.min.js"></script>
+    <script src="Scripts/ng-file-upload-shim.min.js"></script>
+    <script src="Scripts/angular-ui/ui-bootstrap.min.js"></script>
+    <script src="Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+    <script src="Scripts/ui-grid.js"></script>
+    <script src="app.js"></script>
+    <script src="app/Service.js"></script>
+    <script src="app/LoginController.js"></script>
+    <script src="app/ListController.js"></script>
+    <script src="app/AddController.js"></script>
+    <script src="app/EditController.js"></script>
+    <script src="app/UiGrid.js"></script>
+</head>
+
+<body ng-app="EmpApp">
+    <div class="container">
+        <div ng-view>
+
+        </div>
+        <div ng-controller="UiGrid">
+            <div class="grid" ui-grid="gridOptions" style="width:1500px;" ui-grid-pagination ></div>
+        </div>
+    </div>
+</body>
+</html>
+

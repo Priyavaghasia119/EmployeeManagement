@@ -1,0 +1,158 @@
+﻿<div ng-controller="EditController">
+    <div class="modal-dialog">
+        <div class="modal-content" style="white-space: nowrap;">
+            <form name="empForm">
+                <div class="modal-header">
+                    <input type="hidden" id="Id" name="Id" ng-model="emp.Id">
+                    <h4 style="padding-left:20px;">Edit Employee Record</h4><br />
+                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="Name">First Name<span style="color:#ff0000;">*</span></label>
+                            <div class="col-md-8">
+                                <input class="form-control" name="FirstName" type="text" id="FirstName" ng-model="emp.FirstName" ng-required="true" />
+                                <span style="color:#ff0000" ng-show="empForm.FirstName.$touched && empForm.FirstName.$error.required">First name is required.</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="Name">Last Name<span style="color:#ff0000;">*</span></label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" name="LastName" id="LastName" ng-model="emp.LastName" ng-required="true" />
+                                <span style="color:#ff0000" ng-show="empForm.LastName.$touched && empForm.LastName.$error.required">Last name is required.</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="Email">Email<span style="color:#ff0000;">*</span></label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="email" name="mail" id="Email" ng-model="emp.Email" ng-required="true" />
+                                <span style="color:#ff0000;" ng-show="empForm.mail.$error.email">Email not valid !</span>
+                                <span style="color:#ff0000" ng-show="empForm.mail.$touched && empForm.mail.$error.required">Email is required.</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="gender">Gender<span style="color:#ff0000;">*</span></label>
+                            <div class="col-md-8">
+                                <input type="radio" id="male" name="gender" ng-model="emp.Gender" value="Male" /> Male
+                                <input type="radio" id="female" name="gender" ng-model="emp.Gender" value="Female" /> Female
+                                <span style="color:#ff0000" ng-show="empForm.gender.$touched && empForm.gender.$error.required">Gender is required.</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group" >
+                            <label class="control-label col-md-2" for="maritalstatus">Marital Status</label>
+                            <div class="col-md-8" style="padding-left:30px;">                                                               
+                                <input id="maritalstatus" ng-model="emp.MaritalStatus" type="checkbox" ng-true-value="'Yes'" class="checkbox-inline" checked> Married                                                         
+                             </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="DOB">Birth Date<span style="color:#ff0000;">*</span></label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="date" name="dob" id="DOB" ng-model="emp.BirthDate" ng-required="true" />
+                                <span style="color:#ff0000" ng-show="empForm.dob.$touched && empForm.dob.$error.required">Birth Date is required.</span>
+                                <span style="color:#ff0000" id="ErrorMessageForDob"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="hobbies">Hobbies</label>
+                            <div class="col-md-8">
+                                <input id="reading" ng-model="hb1" name="Hobbies" type="checkbox" ng-false-value="''" ng-true-value="'Reading'" class="checkbox-inline"> Reading
+                                <input id="singing" ng-model="hb2" name="Hobbies" type="checkbox" ng-false-value="''" ng-true-value="'Singing'" class="checkbox-inline"> Singing
+                                <input id="programming" ng-model="hb3" name="Hobbies" type="checkbox" ng-false-value="''" ng-true-value="'Programming'" class="checkbox-inline"> Programming <br />
+                                <input id="garrdening" ng-model="hb4" name="Hobbies" type="checkbox" ng-false-value="''" ng-true-value="'Gardening'" class="checkbox-inline"> Gardening
+                                <input id="writing" ng-model="hb5" name="Hobbies" type="checkbox" ng-false-value="''" ng-true-value="'Writing'" class="checkbox-inline"> Writing
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="image">Photo</label>
+                            <div class="col-md-8">                               
+                                <input id="image" ng-model="imagefile" type="file" />
+                                <img alt="" src="http://localhost:50830/image/{{emp.Photo}}" height="100px" width="100px" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="Salary">Salary</label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" name="salary" id="Salary" ng-model="emp.Salary" />
+                                <span style="color:#d64343" id="ErrorMessageForSalary"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="Address">Address</label>
+                            <div class="col-md-8">
+                                <textarea class="form-control" type="" id="Address" ng-model="emp.Address"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="Country">Country</label>
+                            <div class="col-md-8">
+                                <select class="form-control" ng-model="emp.CountryId" ng-change="statelist(emp.CountryId)">
+                                    <option id="Country" ng-value="">--Select Country--</option>
+                                    <option id="Country" ng-repeat="c in country" ng-value="c.CountryId">{{c.CountryName}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="State">State</label>
+                            <div class="col-md-8">
+                                <select class="form-control" ng-model="emp.StateId" ng-change="citylist(emp.StateId)">
+                                    <option id="State" ng-show="emp.EmplID != 0 ? true : false;" ng-value="">--Select State--</option>
+                                    <option id="State" ng-repeat="s in state" ng-value="s.StateId">{{s.StateName}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="City">City</label>
+                            <div class="col-md-8">
+                                <select class="form-control" ng-model="emp.CityId">
+                                    <option id="City" ng-value="">--Select City--</option>
+                                    <option id="City" ng-repeat="ct in city" ng-value="ct.CityId">{{ct.CityName}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="Zipcode">Zipcode</label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" id="Zipcode" name="zipcode" ng-pattern="/^\d{6}$/" ng-model="emp.ZipCode" />
+                                <span style="color:#ff0000" ng-show="empForm.zipcode.$error.pattern">ZipCode must be only 6 digits.</span>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="Password">Password</label>
+                            <div class="col-md-8">
+                                <input class="form-control" name="pwd" type="password" id="Password" ng-pattern="/^(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/" ng-model="emp.Password" />
+                                <span style="color:#ff0000" ng-show="empForm.pwd.$error.pattern">Password should contain one number,one character  <br />  and one special character</span><br/>
+                                <span style="color:#ff0000" ng-show="empForm.pwd.$error.minlength">Minimum 8 chars.</span>
+                                <span style="color:#ff0000" ng-show="empForm.pwd.$error.maxlength"> Maximum 16 chars.</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-12">
+                            <input type="button" ng-disabled="empForm.$invalid" class="btn btn-primary" ng-click="update()" value="Update" />
+                            <a href="#" data-dismiss="modal" class="btn btn-primary">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

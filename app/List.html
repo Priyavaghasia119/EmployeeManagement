@@ -1,0 +1,116 @@
+﻿<div ng-controller="ListController">
+    <br />  
+    <div style="margin-left:900px;">
+        View Employee Record:
+        <select ng-model="view" ng-change="setItemsPerPage(view)"><option>10</option><option>20</option><option>50</option></select>
+    </div>
+    <div style="clear: both; display: inline-block; overflow: hidden; white-space: nowrap; display: table-cell; vertical-align: inherit;text-align: justify;">
+        <a ng-href="#!add" class="btn btn-primary">Add Employee</a>        
+        <button class="btn btn-primary" style="margin-left:1050px;" ng-click="logout()">Logout</button>
+        <br /><br />
+        <table class="table">
+            <tr>
+                <th></th>
+                <th></th>
+                <th>
+                    Photo
+                </th>
+                <th>
+                    Full Name
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Gender
+                </th>
+                <th>
+                    Marital Status
+                </th>
+                <th>
+                    Birth Date
+                </th>
+                <th>
+                    Hobbies
+                </th>
+                <th>
+                    Salary(Rs)
+                </th>
+                <th>
+                    Address
+                <th>
+                    City
+                </th>
+                <th>
+                    State
+                </th>
+                <th>
+                    Country
+                </th>
+                <th>
+                    Zipcode
+                </th>
+            </tr>
+            <tr ng-repeat="emp in employees.employee.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
+                <td>
+                    <a ng-href="#!/edit?id={{emp.EmplID}}" class="btn btn-primary">Edit</a>
+                </td>
+                <td>
+                    <input type="button" class="btn btn-primary" ng-click="delete(emp.EmplID)" name="delete" value="Delete" />
+                </td>
+                <td>
+                    <img alt="" src="http://localhost:50830/image/{{emp.Photo}}" height="100px" width="100px" />
+                </td>
+                <td>
+                    {{ emp.FirstName + " " + emp.LastName }}
+                </td>
+                <td>
+                    {{emp.Email}}
+                </td>
+                <td>
+                    {{emp.Gender=='Male'?'Male':'Female'}}
+                <td>
+                    {{emp.MaritalStatus=='Yes'?'Married':'Unmarried'}}
+                </td>
+                <td>
+                    {{emp.BirthDate.replace('/Date(','').replace(')/','')  | date: 'dd-MM-yyyy'}}
+                </td>
+                <td>
+                    {{emp.Hobbies}}
+                </td>
+                <td>
+                    {{emp.Salary | number : 2}}
+                </td>
+                <td>
+                    {{emp.Address}}
+                </td>
+                <td>
+                    {{emp.CityName}}                  
+                </td>
+                <td>
+                    {{emp.StateName}}
+                </td>
+                <td>
+                    {{emp.CountryName}}
+                </td>
+                <td>
+                    {{emp.ZipCode}}
+                </td>
+            </tr>
+        </table>
+    </div>
+    <ul uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" class="pagination-lg" boundary-links="true" items-per-page="itemsPerPage" max-size="2" rotate="false"></ul>
+</div>
+
+<script type="text/ng-template" id="delete.html">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Delete Employee</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <p>Are you sure you want to delete this record ? </p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">Delete</button>
+        <button class="btn btn-primary" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+    </div>
+</script>
